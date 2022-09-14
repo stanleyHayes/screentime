@@ -11,7 +11,7 @@ const Layout = ({children}) => {
 
     return (
         <Box sx={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
-            <Box>
+            <Box sx={{mb: 7}}>
                 <Header/>
             </Box>
             <Box sx={{flex: 1}}>
