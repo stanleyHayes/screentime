@@ -14,12 +14,18 @@ const theme = createTheme({
             main: '#212121'
         },
         secondary: {
-            main: '#141414'
+            main: '#1ac0ea'
         },
         text: {
             primary: '#ffffff',
             secondary: '#000000B2'
+        },
+        light: {
+            secondary: 'rgba(26,192,234,0.15)'
         }
+    },
+    shape: {
+        borderRadius: 0
     }
 });
 
