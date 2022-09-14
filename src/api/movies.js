@@ -2,14 +2,14 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {CONSTANTS} from "../utils/constants";
 
-const getMovie = createAsyncThunk('movies/getMovie', async (arg, thunkAPI) => {
+const getMovie = createAsyncThunk('movies/getMovie', async ({id}, thunkAPI) => {
     try {
         const response = await axios({
             method: 'GET',
-            url: `${CONSTANTS.SERVER_BASE_URL}/movie/${arg.id}`
+            url: `${CONSTANTS.SERVER_BASE_URL}/movie/${id}`
         });
         return response.data;
-    }catch (e) {
+    } catch (e) {
         const {message} = e.response.data;
         thunkAPI.rejectWithValue(message);
     }
@@ -23,37 +23,37 @@ const getMovies = createAsyncThunk('movies/getMovies', async (arg, thunkAPI) => 
             url: `${CONSTANTS.SERVER_BASE_URL}/movies`
         });
         return response.data;
-    }catch (e) {
+    } catch (e) {
         const {message} = e.response.data;
         thunkAPI.rejectWithValue(message);
     }
 });
 
 
-const updateMovie = createAsyncThunk('movies/updateMovies', async (arg, thunkAPI) => {
+const updateMovie = createAsyncThunk('movies/updateMovies', async ({id, values}, thunkAPI) => {
     try {
         const response = await axios({
             method: 'PUT',
-            url: `${CONSTANTS.SERVER_BASE_URL}/movie/${arg.id}`,
-            data: arg.values
+            url: `${CONSTANTS.SERVER_BASE_URL}/movie/${id}`,
+            data: values
         });
         return response.data;
-    }catch (e) {
+    } catch (e) {
         const {message} = e.response.data;
         thunkAPI.rejectWithValue(message);
     }
 });
 
 
-const createMovie = createAsyncThunk('movies/createMovie', async (arg, thunkAPI) => {
+const createMovie = createAsyncThunk('movies/createMovie', async ({values}, thunkAPI) => {
     try {
         const response = await axios({
             method: 'POST',
             url: `${CONSTANTS.SERVER_BASE_URL}/movie`,
-            data: arg.values
+            data: values
         });
         return response.data;
-    }catch (e) {
+    } catch (e) {
         const {message} = e.response.data;
         thunkAPI.rejectWithValue(message);
     }
