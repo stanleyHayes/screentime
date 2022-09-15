@@ -30,7 +30,7 @@ const MoviesPage = () => {
     }, []);
 
     const [query, setQuery] = useState("");
-    const [filteredMovies, setFilteredMovies] = useState(movies || []);
+    const [filteredMovies, setFilteredMovies] = useState(movies);
 
     const handleQueryChange = event => {
         setQuery(event.target.value);
