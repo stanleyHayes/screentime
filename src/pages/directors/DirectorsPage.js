@@ -26,6 +26,7 @@ const MoviesPage = () => {
 
     useEffect(() => {
         dispatch(DIRECTORS_API.getDirectors());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [query, setQuery] = useState("");

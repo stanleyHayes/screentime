@@ -27,7 +27,7 @@ const DirectorDetailPage = () => {
 
     useEffect(() => {
         dispatch(DIRECTORS_API.getDirector({id}))
-    }, []);
+    }, [id]);
 
     return (
         <Layout>
