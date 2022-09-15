@@ -39,6 +39,13 @@ const MoviesPage = () => {
             director.last_name.toLowerCase().includes(query.toLowerCase())));
     }
 
+    useEffect(() => {
+        if(directors){
+            setFilteredDirectors(directors);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [directors]);
+
     return (
         <Layout>
             {loading && <LinearProgress variant="query" color="secondary"/>}

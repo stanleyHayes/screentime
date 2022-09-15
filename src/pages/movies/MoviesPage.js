@@ -37,6 +37,13 @@ const MoviesPage = () => {
         setFilteredMovies(movies.filter(movie => movie.name.toLowerCase().includes(query.toLowerCase())));
     }
 
+    useEffect(() => {
+        if(movies){
+            setFilteredMovies(movies);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [movies]);
+
     return (
         <Layout>
             {loading && <LinearProgress variant="query" color="secondary"/>}
