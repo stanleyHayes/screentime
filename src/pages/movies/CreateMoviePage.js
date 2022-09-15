@@ -63,7 +63,7 @@ const CreateMoviePage = () => {
     }, []);
 
     const [query, setQuery] = useState("");
-    const [filteredDirectors, setFilteredDirectors] = useState(directors || [])
+    const [filteredDirectors, setFilteredDirectors] = useState(directors);
     const handleQueryChange = event => {
         setQuery(event.target.value);
         setFilteredDirectors(directors.filter(director =>
