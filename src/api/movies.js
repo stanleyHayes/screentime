@@ -30,13 +30,15 @@ const getMovies = createAsyncThunk('movies/getMovies', async (arg, thunkAPI) => 
 });
 
 
-const updateMovie = createAsyncThunk('movies/updateMovies', async ({id, values}, thunkAPI) => {
+const updateMovie = createAsyncThunk('movies/updateMovies', async ({id, values, resetForm, navigate}, thunkAPI) => {
     try {
         const response = await axios({
             method: 'PUT',
             url: `${CONSTANTS.SERVER_BASE_URL}/movie/${id}`,
             data: values
         });
+        resetForm();
+        navigate(`/movies/${id}`);
         return response.data;
     } catch (e) {
         const {message} = e.response.data;
@@ -45,13 +47,15 @@ const updateMovie = createAsyncThunk('movies/updateMovies', async ({id, values},
 });
 
 
-const createMovie = createAsyncThunk('movies/createMovie', async ({values}, thunkAPI) => {
+const createMovie = createAsyncThunk('movies/createMovie', async ({values, resetForm, navigate}, thunkAPI) => {
     try {
         const response = await axios({
             method: 'POST',
             url: `${CONSTANTS.SERVER_BASE_URL}/movie`,
             data: values
         });
+        resetForm();
+        navigate('/movies');
         return response.data;
     } catch (e) {
         const {message} = e.response.data;

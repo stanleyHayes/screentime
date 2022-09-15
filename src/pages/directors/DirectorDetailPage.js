@@ -24,6 +24,7 @@ const DirectorDetailPage = () => {
     const {loading, error, director} = useSelector(selectDirector);
     const dispatch = useDispatch();
     const {id} = useParams();
+
     useEffect(() => {
         dispatch(DIRECTORS_API.getDirector({id}))
     }, []);
@@ -44,7 +45,7 @@ const DirectorDetailPage = () => {
                             </Typography>
                         </Grid>
                         <Grid item={true} xs={12} md="auto">
-                            <Link to={`/directors/${director._id}`} style={{textDecoration: 'none'}}>
+                            <Link to={`/directors/${director?._id}/update`} style={{textDecoration: 'none'}}>
                                 <Button
                                     type="submit"
                                     fullWidth={true}
@@ -73,7 +74,7 @@ const DirectorDetailPage = () => {
 
                             <Card elevation={0} sx={{height: '100%'}}>
                                 <CardContent sx={{height: '100%'}}>
-                                    <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                                    <Stack direction="column" spacing={2}>
                                         <Box>
                                             <Typography
                                                 align="center"
@@ -81,7 +82,7 @@ const DirectorDetailPage = () => {
                                                 sx={{color: 'text.secondary', textTransform: 'uppercase'}}>
                                                 First Name
                                             </Typography>
-                                            <Typography align="center" variant="body1" sx={{color: 'text.primary'}}>
+                                            <Typography align="center" variant="h6" sx={{color: 'text.primary'}}>
                                                 {director?.first_name}
                                             </Typography>
                                         </Box>
@@ -92,7 +93,7 @@ const DirectorDetailPage = () => {
                                                 sx={{color: 'text.secondary', textTransform: 'uppercase'}}>
                                                 Last Name
                                             </Typography>
-                                            <Typography align="center" variant="body1" sx={{color: 'text.primary'}}>
+                                            <Typography align="center" variant="h6" sx={{color: 'text.primary'}}>
                                                 {director?.last_name}
                                             </Typography>
                                         </Box>

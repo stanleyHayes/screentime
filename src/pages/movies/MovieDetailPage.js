@@ -1,5 +1,5 @@
 import Layout from "../../components/layout/layout";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {
     Alert,
     AlertTitle,
@@ -44,7 +44,7 @@ const MovieDetailPage = () => {
                             </Typography>
                         </Grid>
                         <Grid item={true} xs={12} md="auto">
-                            <Link to={`/movies/${movie._id}`} style={{textDecoration: 'none'}}>
+                            <Link to={`/movies/${movie?._id}/update`} style={{textDecoration: 'none'}}>
                                 <Button
                                     type="submit"
                                     fullWidth={true}
@@ -71,12 +71,19 @@ const MovieDetailPage = () => {
                     <Grid container={true} spacing={4}>
                         <Grid item={true} xs={12} md={6}>
 
-                            <Card elevation={0} sx={{height: '100%'}}>
-                                <CardContent sx={{height: '100%'}}>
-                                    <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                            <Card
+                                elevation={0}
+                                sx={{
+                                    height: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                <CardContent>
+                                    <Stack spacing={2} justifyContent="center" alignItems="center">
                                         <Typography
                                             align="center"
-                                            variant="body1"
+                                            variant="h4"
                                             sx={{color: 'secondary.main', textTransform: 'uppercase'}}>
                                             {movie?.name}
                                         </Typography>
@@ -102,11 +109,11 @@ const MovieDetailPage = () => {
                                         <Typography
                                             variant="h6"
                                             align="center"
-                                            sx={{color: 'text.primary', mb: 2}}>
+                                            sx={{color: 'text.secondary'}}>
                                             Director
                                         </Typography>
                                         <Typography
-                                            variant="h6"
+                                            variant="h4"
                                             align="center"
                                             sx={{color: 'text.primary', mb: 2}}>
                                             {`${movie?.director?.first_name} ${movie?.director?.last_name}`}

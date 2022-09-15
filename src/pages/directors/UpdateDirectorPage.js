@@ -17,22 +17,30 @@ import {
     Typography
 } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {selectDirector} from "../../redux/features/directors/directors-slice";
 import {DIRECTORS_API} from "../../api/directors";
+import {useEffect} from "react";
 
 const UpdateDirectorPage = () => {
     const {loading, error, director} = useSelector(selectDirector);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const {id} = useParams();
+
+    useEffect(() => {
+        dispatch(DIRECTORS_API.getDirector({id}))
+    }, []);
+
     const formik = useFormik({
         initialValues: {
-            first_name: director.first_name,
-            last_name: director.last_name,
+            first_name: director?.first_name,
+            last_name: director?.last_name,
         },
         onSubmit: (values, {resetForm}) => {
-            dispatch(DIRECTORS_API.createDirector({
+            dispatch(DIRECTORS_API.updateDirector({
+                id,
                 values,
                 resetForm,
                 navigate
