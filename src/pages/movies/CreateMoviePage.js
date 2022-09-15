@@ -72,6 +72,11 @@ const CreateMoviePage = () => {
             director.last_name.toLowerCase().includes(query.toLowerCase())));
     }
 
+    useEffect(() => {
+        if(directors){
+            setFilteredDirectors(directors);
+        }
+    }, [directors]);
 
     return (
         <Layout>
