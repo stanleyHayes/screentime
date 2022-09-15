@@ -22,6 +22,10 @@ import {selectMovie} from "../../redux/features/movies/movies-slice";
 import {DatePicker} from "@mui/x-date-pickers";
 import {MOVIES_API} from "../../api/movies";
 import {useNavigate, useParams} from "react-router";
+import Director from "../../components/director/director";
+import {selectDirector} from "../../redux/features/directors/directors-slice";
+import {DIRECTORS_API} from "../../api/directors";
+import moment from "moment";
 
 const UpdateMoviePage = () => {
 
@@ -32,9 +36,15 @@ const UpdateMoviePage = () => {
         dispatch(MOVIES_API.getMovie({id}))
     }, []);
 
+    useEffect(() => {
+        dispatch(DIRECTORS_API.getDirectors());
+    }, []);
+
+
     const {loading, error, movie} = useSelector(selectMovie);
-    const [releaseYear, setReleaseYear] = useState(new Date(1, 1, movie.release_year));
-    const [director, setDirector] = useState(movie.director);
+    const {directors} = useSelector(selectDirector);
+    const [releaseYear, setReleaseYear] = useState(new Date(movie?.release_year, 1, 1));
+    const [director, setDirector] = useState(movie?.director);
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -47,7 +57,7 @@ const UpdateMoviePage = () => {
             }
             dispatch(MOVIES_API.updateMovie({
                 id,
-                values: {...values, director: director._id, release_year: releaseYear},
+                values: {...values, director: director._id, release_year: moment(releaseYear).year()},
                 resetForm,
                 navigate
             }));
@@ -188,6 +198,38 @@ const UpdateMoviePage = () => {
                             </Grid>
                         </Grid>
                     </form>
+
+                    <Divider variant="fullWidth" sx={{my: 3}} light={true}/>
+                    <Typography
+                        align="center"
+                        variant="h6"
+                        gutterBottom={true}
+                        sx={{color: 'secondary.main', textTransform: 'uppercase'}}>
+                        Directors to choose from
+                    </Typography>
+                    <Typography
+                        align="center"
+                        variant="body2"
+                        sx={{color: 'text.primary', textTransform: 'uppercase'}}>
+                        Click to select director
+                    </Typography>
+
+                    <Divider variant="fullWidth" sx={{my: 3}} light={true}/>
+
+                    <Grid container={true} spacing={4}>
+                        {directors && directors.map(director => {
+                            return (
+                                <Grid
+                                    onClick={() => setDirector(director)}
+                                    key={director._id}
+                                    item={true}
+                                    xs={12}
+                                    md={4}>
+                                    <Director director={director}/>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
                 </Container>
             </Box>
         </Layout>
