@@ -30,8 +30,9 @@ const UpdateDirectorPage = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        dispatch(DIRECTORS_API.getDirector({id}))
-    }, []);
+        dispatch(DIRECTORS_API.getDirector({id}));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     const formik = useFormik({
         initialValues: {

@@ -1,5 +1,5 @@
 import Layout from "../../components/layout/layout";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {
     Alert,
     AlertTitle,
@@ -25,8 +25,9 @@ const MovieDetailPage = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     useEffect(() => {
-        dispatch(MOVIES_API.getMovie({id}))
-    }, []);
+        dispatch(MOVIES_API.getMovie({id}));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     return (
         <Layout>

@@ -33,11 +33,13 @@ const UpdateMoviePage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(MOVIES_API.getMovie({id}))
-    }, []);
+        dispatch(MOVIES_API.getMovie({id}));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     useEffect(() => {
         dispatch(DIRECTORS_API.getDirectors());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

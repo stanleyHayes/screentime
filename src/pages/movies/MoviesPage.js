@@ -26,6 +26,7 @@ const MoviesPage = () => {
 
     useEffect(() => {
         dispatch(MOVIES_API.getMovies());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [query, setQuery] = useState("");
