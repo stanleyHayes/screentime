@@ -65,6 +65,10 @@ const CreateMoviePage = () => {
     const [query, setQuery] = useState("");
     const [filteredDirectors, setFilteredDirectors] = useState(directors);
     const handleQueryChange = event => {
+        if(event.target.value === ""){
+            setFilteredDirectors(directors);
+            return;
+        }
         setQuery(event.target.value);
         setFilteredDirectors(directors.filter(director =>
             director.first_name.toLowerCase().includes(query.toLowerCase())

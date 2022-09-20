@@ -33,6 +33,10 @@ const MoviesPage = () => {
     const [filteredDirectors, setFilteredDirectors] = useState(directors);
     const handleQueryChange = event => {
         setQuery(event.target.value);
+        if(event.target.value === ""){
+            setFilteredDirectors(directors);
+            return;
+        }
         setFilteredDirectors(directors.filter(director =>
             director.first_name.toLowerCase().includes(query.toLowerCase())
             ||

@@ -33,6 +33,10 @@ const MoviesPage = () => {
     const [filteredMovies, setFilteredMovies] = useState(movies);
 
     const handleQueryChange = event => {
+        if(event.target.value === ""){
+            setFilteredMovies(movies);
+            return;
+        }
         setQuery(event.target.value);
         setFilteredMovies(movies.filter(movie => movie.name.toLowerCase().includes(query.toLowerCase())));
     }
