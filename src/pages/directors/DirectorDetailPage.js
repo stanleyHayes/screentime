@@ -27,6 +27,7 @@ const DirectorDetailPage = () => {
 
     useEffect(() => {
         dispatch(DIRECTORS_API.getDirector({id}))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return (
